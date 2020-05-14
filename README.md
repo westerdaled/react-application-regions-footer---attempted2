@@ -17,7 +17,7 @@ extensions:
 
 ## Summary
 
-Project "upgraded" to to SPF 1.10.0 see upgradereport.md
+Project "upgraded" to to SPF 1.10.0 see [upgrade-report.md](https://github.com/westerdaled/react-application-regions-footer---attempted2/blob/master/upgrade-report.md)
 
 Sample SharePoint Framework application customizer showing how to create a custom footer for modern pages, in order to show data about an area manager for a specific region.
 
