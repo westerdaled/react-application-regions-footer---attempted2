@@ -1,0 +1,12 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "version": "1.10.0",
+    "isDomainIsolated": false,
+    "isCreatingSolution": true,
+    "packageManager": "npm",
+    "componentType": "extension",
+    "libraryName": "spfx-yammer-footer",
+    "libraryId": "418c4aa8-0c70-4513-bb51-74042d1d4dea",
+    "environment": "spo"
+  }
+}
