@@ -17,6 +17,8 @@ extensions:
 
 ## Summary
 
+Project "upgraded" to to SPF 1.10.0 see upgradereport.md
+
 Sample SharePoint Framework application customizer showing how to create a custom footer for modern pages, in order to show data about an area manager for a specific region.
 
 ![The Regions Footer Application Customizer in action](./assets/Regions-Footer.png)
