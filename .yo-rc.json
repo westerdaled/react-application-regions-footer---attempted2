@@ -1,12 +1,29 @@
 {
+  "@pnp/generator-spfx": {
+    "framework": "react",
+    "pnpFramework": "reactjs.plus",
+    "pnp-libraries": [
+      "rush@3.3"
+    ],
+    "pnp-ci": "no-devops",
+    "pnp-vetting": [
+      "webpack-analyzer",
+      "stylelint",
+      "csscomb"
+    ],
+    "spfxenv": "spo",
+    "pnp-testing": []
+  },
   "@microsoft/generator-sharepoint": {
-    "version": "1.10.0",
-    "isDomainIsolated": false,
+    "environment": "spo",
+    "framework": "react",
     "isCreatingSolution": true,
+    "version": "1.10.0",
+    "libraryName": "react-application-regions-footer",
+    "libraryId": "8143a1e2-ef83-43d2-b0bf-e22d0aa62e91",
     "packageManager": "npm",
+    "isDomainIsolated": false,
     "componentType": "extension",
-    "libraryName": "spfx-yammer-footer",
-    "libraryId": "418c4aa8-0c70-4513-bb51-74042d1d4dea",
-    "environment": "spo"
+    "extensionType": "ApplicationCustomizer"
   }
 }

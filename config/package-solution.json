@@ -1,14 +1,28 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
   "solution": {
-    "name": "spfx-yammer-footer-client-side-solution",
-    "id": "418c4aa8-0c70-4513-bb51-74042d1d4dea",
-    "version": "1.0.14.0",
+    "name": "react-application-regions-footer-client-side-solution",
+    "id": "8143a1e2-ef83-43d2-b0bf-e22d0aa62e91",
+    "version": "2.0.0.0",
+    "includeClientSideAssets": true,
     "skipFeatureDeployment": true,
     "isDomainIsolated": false,
-    "includeClientSideAssets": true
+    "features": [
+      {
+        "title": "Application Extension - Deployment of custom action.",
+        "description": "Deploys a custom action with ClientSideComponentId association",
+        "id": "d879d79c-1b31-408b-80d7-05564bd00fd0",
+        "version": "2.0.0.0",
+        "assets": {
+          "elementManifests": [
+            "elements.xml",
+            "ClientSideInstance.xml"
+          ]
+        }
+      }
+    ]
   },
   "paths": {
-    "zippedPackage": "solution/spfx-yammer-footer.sppkg"
+    "zippedPackage": "solution/react-application-regions-footer.sppkg"
   }
 }

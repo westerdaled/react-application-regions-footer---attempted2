@@ -11,13 +11,11 @@ extensions:
   - SharePoint Framework
   platforms:
   - react
-  createdDate: 11/1/2017 12:00:00 AM
+  createdDate: 05/14/2020 12:00:00 AM
 ---
 # Regions Footer Application Customizer
 
 ## Summary
-
-Project "upgraded" to to SPF 1.10.0 see [upgrade-report.md](https://github.com/westerdaled/react-application-regions-footer---attempted2/blob/master/upgrade-report.md)
 
 Sample SharePoint Framework application customizer showing how to create a custom footer for modern pages, in order to show data about an area manager for a specific region.
 
@@ -25,7 +23,7 @@ Sample SharePoint Framework application customizer showing how to create a custo
 
 ## Used SharePoint Framework Version
 
-![SPFx v1.3](https://img.shields.io/badge/SPFx-1.3-green.svg)
+![SPFx v1.10.0](https://img.shields.io/badge/SPFx-1.10.0-green.svg)
 
 ## Applies to
 
@@ -37,12 +35,14 @@ Sample SharePoint Framework application customizer showing how to create a custo
 Solution|Author(s)
 --------|---------
 react-application-regions-footer|Paolo Pialorsi (MCM, MVP, [PiaSys.com](https://piasys.com), [@PaoloPia](https://twitter.com/PaoloPia))
+react-application-regions-footer|Daniel Westerdale ([westerdale.blog](https://westerdale.blog), [@westerdaled](https://twitter.com/westerdaled))
 
 ## Version history
 
 Version|Date|Comments
 -------|----|--------
-1.0.0|September 28, 2017|Initial release
+1.0.0|September 28, 2017|Initial release (Paolo Pialorsi)
+2.0.0|May 14, 2020|Upgraded to SPFx 1.10.0 (Daniel Westerdale)
 
 ## Disclaimer
 
@@ -61,8 +61,8 @@ Version|Date|Comments
   * `npm i`
   * `gulp serve --nobrowser`
 * open a modern site
-* go to the "Term Store Management" page of the site settings and create a new Term Group, or at least a new Term Set
-  * Call it with whatever name you like (for example Regions) - You can use the following PnP Provisioning Template ([GeoGroups.xml](./GeoGroups.xml)) to create such a Term Group. In order to import the XML file, use the following command:
+* go to the **Term Store Management** page of the site settings and create a new Term Group, or at least a new Term Set
+  * Call it with whatever name you like (for example **Regions**) - You can use the following PnP Provisioning Template ([`GeoGroups.xml`](./GeoGroups.xml)) to create such a Term Group. In order to import the XML file, use the following command:
     * `Connect-PnPOnline "https://<your-tenant>.sharepoint.com`
     * `Import-PnPTermGroupFromXml -Path .\GeoGroups.xml`
   * Or you can manually load/Configure a hierarchy of terms like in the following figure
@@ -70,16 +70,16 @@ Version|Date|Comments
   ![The Regions in the Term Store](./assets/Regions-Footer-Taxonomy.png)
 
   * If you manually load the terms, please notice that the top level terms of the hierarchy (i.e. the regions) need to have configured the following custom properties, like in the following figure
-    * ContactEmail
-    * ContactName
-    * ContactPhone
-    * YammerGroupURL
+    * `ContactEmail`
+    * `ContactName`
+    * `ContactPhone`
+    * `YammerGroupURL`
 
   ![The Regions in the Term Store](./assets/Regions-Footer-Taxonomy-Custom-Properties.png)
 
 * append the following query string parameters to the home page URL
 
-```text
+```bash
 ?loadSPFX=true&debugManifestsFile=https://localhost:4321/temp/manifests.js&customActions={"67fd1d01-84e8-4fbf-85bd-4b80768c6080":{"location":"ClientSideExtension.ApplicationCustomizer","properties":{"SourceTermSetName":"Regions"}}}
 ```
 
@@ -90,9 +90,9 @@ In order to deploy the sample solution in a real environment, or at least in ord
 * bundle and package the solution by executing the following commands in the command line:
   * `gulp bundle --ship`
   * `gulp package-solution --ship`
-* upload the content of the ./temp/deploy subfolder of the sample root folder into the target hosting environment
-* add to the "Apps for SharePoint" library of the AppCatalog in your tenant the react-application-regions footer.spppkg file that you will find under the ./sharepoint/solution subfolder of the sample root folder
-* the sample is tenant-wide available, so you don't need to install it to every single target site, you simply need to bind the application customizer to the target site. In order to do that, you can use the PowerShell script [RegionsFooterProvisionCustomizer.ps1](./RegionsFooterProvisionCustomizer.ps1)
+* upload the content of the `./temp/deploy` subfolder of the sample root folder into the target hosting environment
+* add to the **Apps for SharePoint** library of the AppCatalog in your tenant the `react-application-regions-footer.spppkg` file that you will find under the `./sharepoint/solution` subfolder of the sample root folder
+* the sample is tenant-wide available, so you don't need to install it to every single target site, you simply need to bind the application customizer to the target site. In order to do that, you can use the PowerShell script [`RegionsFooterProvisionCustomizer.ps1`](./RegionsFooterProvisionCustomizer.ps1)
 
 ## Features
 
@@ -106,7 +106,7 @@ So far, the monitor of the page status is provided by using a _setTimeout_ funct
 
 Moreover, the footer right now - for the sake of demo purposes - stores the selected country in the session local storage of the browser, at the site collection level. Thus, whenever you start the application customizer in a new browsing session, you will have to configure the target country. You can update this demo behavior storing the currently selected country in a local repository for the site, or overriding the properties of the application customizer.
 
-Lastly, the application customizer renders in pages only, and not in lists and libraries. This result is achieved by monitoring the property _this.context.pageContext.listItem_ . If the _listItem_ property is _NULL_, it means we are in a page, and the footer will be visible, otherwise we are in a list or library view, and the footer will not be visible.
+Lastly, the application customizer renders in pages only, and not in lists and libraries. This result is achieved by monitoring the property `this.context.pageContext.listItem` . If the `listItem` property is `NULL`, it means we are in a page, and the footer will be visible, otherwise we are in a list or library view, and the footer will not be visible.
 
 This sample illustrates the following concepts on top of the SharePoint Framework:
 
@@ -114,6 +114,6 @@ This sample illustrates the following concepts on top of the SharePoint Framewor
 * using React to build SharePoint Framework application customizers
 * logging information to console using a custom SharePoint Framework log handler
 * using the SPFx Dialog Framework
-* consuming the SharePoint Online taxonomy service using REST requests against the _client.svc/ProcessQuery_ service of CSOM
+* consuming the SharePoint Online taxonomy service using REST requests against the `client.svc/ProcessQuery` service of CSOM
 
 ![](https://telemetry.sharepointpnp.com/sp-dev-fx-extensions/samples/react-application-regions-footer)

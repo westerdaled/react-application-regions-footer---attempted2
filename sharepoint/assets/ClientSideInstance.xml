@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+    <ClientSideComponentInstance
+        Title="YammerFooter"
+        Location="ClientSideExtension.ApplicationCustomizer"
+        ComponentId="67fd1d01-84e8-4fbf-85bd-4b80768c6080"
+        Properties="{&quot;testMessage&quot;:&quot;Test message&quot;}">
+    </ClientSideComponentInstance>
+</Elements>

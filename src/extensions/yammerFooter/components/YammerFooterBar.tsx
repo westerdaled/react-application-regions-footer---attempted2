@@ -17,7 +17,7 @@ import { PrimaryButton, CommandButton, IButtonProps } from 'office-ui-fabric-rea
 import { Dialog } from '@microsoft/sp-dialog';
 import SelectRegionDialog from './SelectRegionDialog';
 
-import * as SPTermStore from './SPTermStoreService'; 
+import * as SPTermStore from './SPTermStoreService';
 
 export default class YammerFooterBar extends React.Component<IYammerFooterBarProps, IYammerFooterBarState> {
 
@@ -25,12 +25,12 @@ export default class YammerFooterBar extends React.Component<IYammerFooterBarPro
    * Main constructor for the component
    */
   constructor(props: IYammerFooterBarProps) {
-    super();
-    
+    super(props);
+
     const editMode: boolean = false;
-    const currentRegion: string = (sessionStorage.getItem(`currentRegion-${props.context.pageContext.site.id}`) != undefined) ? 
+    const currentRegion: string = (sessionStorage.getItem(`currentRegion-${props.context.pageContext.site.id}`) != undefined) ?
         sessionStorage.getItem(`currentRegion-${props.context.pageContext.site.id}`) : undefined;
-    
+
     // TODO: Retrieve the currently configured one
     this.state = {
         editMode: editMode,
@@ -47,7 +47,7 @@ export default class YammerFooterBar extends React.Component<IYammerFooterBarPro
     this.setState({
         editMode: currentEditMode
     }, () => {
-        window.setTimeout(this.refreshEditMode, 1000);        
+        window.setTimeout(this.refreshEditMode, 1000);
     });
   }
 
@@ -76,7 +76,7 @@ export default class YammerFooterBar extends React.Component<IYammerFooterBarPro
 
   public render(): React.ReactElement<IYammerFooterBarProps> {
 
-    const defaultRegion: IRegionForFooter = 
+    const defaultRegion: IRegionForFooter =
     {
         contactName: "---",
         contactEmail: "---",
@@ -91,7 +91,7 @@ export default class YammerFooterBar extends React.Component<IYammerFooterBarPro
         }) : null;
 
     const currentRegion: IRegionForFooter = (regionsForFooter != null && regionsForFooter.length > 0) ?
-        ((this.state.region != null) ? 
+        ((this.state.region != null) ?
             regionsForFooter.filter((e, i, a) => { return(e.regionName == this.state.region); })[0] : defaultRegion)
         : null;
 
@@ -103,28 +103,28 @@ export default class YammerFooterBar extends React.Component<IYammerFooterBarPro
                 <div className={`ms-Grid ${styles.footerGrid}`}>
                     <div className="ms-Grid-row">
                         <div className="ms-Grid-col ms-sm3 ms-md3 ms-lg3">
-                            <CommandButton 
+                            <CommandButton
                                 data-automation="regionName"
                                 className={ styles.footerGridRowContent }
                                 iconProps={ { iconName: 'WorldClock' } }>{ strings.RegionLabel } {currentRegion.regionName}</CommandButton>
                             {/* <Label className={ styles.footerGridRowContent }>Region: {currentRegion.regionName}</Label> */}
                         </div>
                         <div className="ms-Grid-col ms-sm3 ms-md3 ms-lg3">
-                            <CommandButton 
+                            <CommandButton
                                 data-automation="contactName"
                                 className={ styles.footerGridRowContent }
                                 iconProps={ { iconName: 'Contact' } }>{ strings.RegionManagerLabel } {currentRegion.contactName}</CommandButton>
                             {/* <Label className={ styles.footerGridRowContent }>Manager: {currentRegion.contactName}</Label> */}
                         </div>
                         <div className="ms-Grid-col ms-sm3 ms-md3 ms-lg3">
-                            <CommandButton 
+                            <CommandButton
                                 data-automation="contactEmail"
                                 className={ styles.footerGridRowContent }
                                 iconProps={ { iconName: 'Mail' } }
                                 href={`mailto:${currentRegion.contactEmail}`}>{currentRegion.contactEmail}</CommandButton>
                         </div>
                         <div className="ms-Grid-col ms-sm3 ms-md3 ms-lg3">
-                            <CommandButton 
+                            <CommandButton
                                 data-automation="yammerGroupUrl"
                                 className={ styles.footerGridRowContent }
                                 iconProps={ { iconName: 'YammerLogo' } }
@@ -136,7 +136,7 @@ export default class YammerFooterBar extends React.Component<IYammerFooterBarPro
                 <div className={`ms-Grid ${styles.footerGrid}`}>
                 <div className="ms-Grid-row">
                     <div className="ms-Grid-col ms-sm12 ms-md12 ms-lg12">
-                        <PrimaryButton 
+                        <PrimaryButton
                             data-automation="editRegion"
                             onClick={ this._clickEditRegion }
                             iconProps={ { iconName: 'WorldClock' } }>Select the Region</PrimaryButton>
@@ -176,7 +176,7 @@ export default class YammerFooterBar extends React.Component<IYammerFooterBarPro
 
     let selectedRegion: string = this._searchSelectedRegion(this.props.menuItems, selectedItem);
     console.log(selectedRegion);
-    
+
     return(selectedRegion);
   }
 
@@ -204,7 +204,7 @@ export default class YammerFooterBar extends React.Component<IYammerFooterBarPro
   private _searchSelectedItem(items: SPTermStore.ISPTermObject[], selectedValue: string): SPTermStore.ISPTermObject {
 
     let selectedItem: SPTermStore.ISPTermObject = null;
-    
+
     let matchingItems = items.filter((e, i, a) => { return(e.name == selectedValue); });
     if (matchingItems != undefined && matchingItems.length > 0) {
         selectedItem = matchingItems[0];

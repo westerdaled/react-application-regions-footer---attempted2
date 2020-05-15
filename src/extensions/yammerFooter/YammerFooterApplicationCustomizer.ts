@@ -2,22 +2,19 @@ import * as React from 'react';
 import * as ReactDom from 'react-dom';
 
 import { override } from '@microsoft/decorators';
-import { Log, EventArgs } from '@microsoft/sp-core-library';
+import { Log } from '@microsoft/sp-core-library';
 import {
   BaseApplicationCustomizer,
   PlaceholderContent,
   PlaceholderName
 } from '@microsoft/sp-application-base';
-import { autobind } from 'office-ui-fabric-react/lib/Utilities';
-
-import { escape } from '@microsoft/sp-lodash-subset'; 
 
 import styles from './YammerFooter.module.scss';
 import * as strings from 'YammerFooterApplicationCustomizerStrings';
 
 import YammerFooterBar from './components/YammerFooterBar';
 import { IYammerFooterBarProps } from './components/IYammerFooterBarProps';
-import * as SPTermStore from './components/SPTermStoreService'; 
+import * as SPTermStore from './components/SPTermStoreService';
 
 const LOG_SOURCE: string = 'YammerFooterApplicationCustomizer';
 
@@ -44,7 +41,7 @@ export default class YammerFooterApplicationCustomizer
     // Added to handle possible changes on the existence of placeholders
     // this.context.placeholderProvider.changedEvent.add(this, this._renderPlaceHolders);
     // this.context.application._layoutChangedEvent.add(this, this._layoutChanged);
-    
+
     // Retrieve the menu items from taxonomy
     Log.info(LOG_SOURCE, `Creating instance of SPTermStore.SPTermStoreService`);
     Log.info(LOG_SOURCE, `spHttpClient: ${this.context.spHttpClient}`);
@@ -56,20 +53,19 @@ export default class YammerFooterApplicationCustomizer
 
     Log.info(LOG_SOURCE, `SourceTermSetName: ${this.properties.SourceTermSetName}`);
     this._bottomMenuItems = await termStoreService.getTermsFromTermSetAsync(this.properties.SourceTermSetName);
-        
+
     // Call render method for generating the needed html elements
     this._renderPlaceHolders();
 
     return Promise.resolve<void>();
   }
 
-  @autobind
-  private _layoutChanged(eventArgs: EventArgs): void {
+  private _layoutChanged = (_eventArgs: any) => {
     this._renderPlaceHolders();
   }
 
   private _renderPlaceHolders(): void {
-    
+
     Log.info(LOG_SOURCE, `Available placeholders:  ${this.context.placeholderProvider.placeholderNames.map(name => PlaceholderName[name]).join(', ')}`);
 
     // Handling the bottom placeholder
@@ -96,7 +92,7 @@ export default class YammerFooterApplicationCustomizer
             menuItems: this._bottomMenuItems
           }
         );
-    
+
         ReactDom.render(element, this._bottomPlaceholder.domElement);
       }
     }
